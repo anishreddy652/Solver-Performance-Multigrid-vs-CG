@@ -45,10 +45,10 @@ int main()
   int i,lev;
   
   //set parameters________________________________________
-  p.Lmax = 7; // max number of levels
+  p.Lmax = 10; // max number of levels
   p.N = 2*NN;  // MUST BE POWER OF 2
     
-  nlev = 0; // NUMBER OF LEVELS:  nlev = 0 give top level alone 
+  nlev = 10; // NUMBER OF LEVELS:  nlev = 0 give top level alone 
   if(nlev  > p.Lmax){ 
     printf("ERROR More levels than available in lattice! \n");
     return 0; }
@@ -90,7 +90,7 @@ int main()
   //printf("At the %d cycle the mag residue is %g \n",ncycle,resmag);
  
   // while(resmag > 0.00001 && ncycle < 10000)
-   while(resmag > 0.000001)
+   while(resmag > 0.0001)
     { 
       ncycle +=1; 
       for(lev = 0;lev<nlev; lev++)   //go down 
@@ -149,14 +149,14 @@ void relax(double *phi, double *res, int lev, int niter, param_t p)
   //Run Jacobi ITerations
   for(i=0; i<niter; i++){
 
-    #pragma acc parallel loop
+    //#pragma acc parallel loop
     for(x = 0; x < L; x++){
       // phi_temp[x] = ALPHA * (residual[x] + 0.5 * (phi([x+1] + phi[x-1])) + (1 - ALPHA) * PHI[x]
         phi_temp[x] = 0.5*(res[x] + p.scale[lev] * (phi[(x+1)%L] + phi[(x-1+L)%L])) + 0.5*phi[x]; 
     }
 
     //Copy It Over
-    #pragma acc parallel loop
+    //#pragma acc parallel loop
     for(x = 0; x < L; x++){
         phi[x] = phi_temp[x];
     }
@@ -198,6 +198,7 @@ void inter_add(double *phi_f,double *phi_c,int lev,param_t p)
 
       
   //set to zero so phi = error 
+  #pragma acc parallel loop
   for(x = 0; x< Lc; x++){phi_c[x] = 0.0;}
 
   return;

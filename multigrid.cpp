@@ -42,10 +42,10 @@ int main()
   int i,lev;
   
   //set parameters________________________________________
-  p.Lmax = 7; // max number of levels
+  p.Lmax = 10; // max number of levels
   p.N = 2*NN;  // MUST BE POWER OF 2
     
-  nlev = 0; // NUMBER OF LEVELS:  nlev = 0 give top level alone 
+  nlev = 10; // NUMBER OF LEVELS:  nlev = 0 give top level alone 
   if(nlev  > p.Lmax){ 
     printf("ERROR More levels than available in lattice! \n");
     return 0; }
@@ -87,7 +87,7 @@ int main()
   //printf("At the %d cycle the mag residue is %g \n",ncycle,resmag);
  
   // while(resmag > 0.00001 && ncycle < 10000)
-   while(resmag > 0.000001)
+   while(resmag > 0.0001)
     { 
       ncycle +=1; 
       for(lev = 0;lev<nlev; lev++)   //go down 
