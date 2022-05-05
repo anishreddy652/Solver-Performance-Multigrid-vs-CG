@@ -11,7 +11,7 @@ We compare the performances of the following solvers.
 
 
 
-# Instructions to run parallelized scripts for Multigrid and Red-Black:
+# Instructions to run parallelized scripts:
 
 First, SSH into the SCC
 
@@ -37,5 +37,7 @@ g++ -O2 multigrid.cpp -o serial
 Run
 ./serial
 
+
+Conjugate Gradient can be run from the makefile within the respective directory.
 
 
