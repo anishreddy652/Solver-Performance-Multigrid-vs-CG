@@ -23,13 +23,19 @@ Load in PGI Compiler & gcc
 module load pgi
 module load gcc
 
-Compile PGI code Multigrid.cpp
-pgc++ -std=c++11 -Minfo=accel -acc -ta=tesla Multigrid.cpp -o runmg
+Compile PGI code multigrid_OpenAcc.cpp
+pgc++ -std=c++11 -Minfo=accel -acc -ta=tesla multigrid_OpenAcc.cpp -o runmg
 
 Run
 ./runmg
 
+Compare with Serial
 
+Compile
+g++ -O2 multigrid.cpp -o serial
+
+Run
+./serial
 
 
 
