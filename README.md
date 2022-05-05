@@ -11,7 +11,7 @@ We compare the performances of the following solvers.
 
 
 
-Instructions to run parallelized scripts for Multigrid and Red-Black:
+# Instructions to run parallelized scripts for Multigrid and Red-Black:
 
 First, SSH into the SCC
 
